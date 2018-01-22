@@ -17,7 +17,7 @@ limitations under the License.
 	<groupId>com.indra.sofia4cities.ssap</groupId>
 	<artifactId>opensdk</artifactId>
 	<packaging>jar</packaging>
-	<version>3.4.7</version>
+	<version>1.0.0</version>
 	<name>opensdk</name>
 	<url>http://maven.apache.org</url>
 	<properties>
