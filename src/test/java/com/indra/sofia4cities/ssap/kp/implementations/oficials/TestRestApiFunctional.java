@@ -89,6 +89,7 @@ public class TestRestApiFunctional {
 	@Before
 	public void setUp() throws Exception {
 		this.api = new SSAPResourceAPI(SERVICE_URL);
+		RestApiUtils.disableSSLVerification();
 		
 		
 	}

@@ -18,7 +18,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.X509Certificate;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import javax.ws.rs.core.Response;
 
 import org.slf4j.Logger;
@@ -38,7 +47,7 @@ public class RestApiUtils {
 	}
 	
 	public Response join(SSAPResourceAPI api, String kp_instance, String token){
-		
+//		disableSSLVerification();
 		SSAPResource ssapJoin=new SSAPResource();		
 		ssapJoin.setJoin(true);
 		ssapJoin.setInstanceKP(kp_instance);
@@ -106,4 +115,50 @@ public class RestApiUtils {
 	System.out.println(responseData.toString());
 	return null;
 	}
+	
+	public static void disableSSLVerification() {
+		log.debug("Disabling SSL verification - INIT");
+		
+		try {
+			final SSLContext sslContext = SSLContext.getInstance("TLS");
+			
+		    sslContext.init(null, new TrustManager[]{new X509TrustManager() {
+	
+				@Override
+				public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType)
+						throws java.security.cert.CertificateException {
+					System.out.println();
+					
+				}
+	
+				@Override
+				public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType)
+						throws java.security.cert.CertificateException {
+					System.out.println();
+					
+				}
+	
+				@Override
+				public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+					return new X509Certificate[0];
+				}
+	        }}, null);
+	 
+	        HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
+	        HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+	            public boolean verify(String hostname, SSLSession session) {
+	                return true;
+	            }
+	        });
+		} catch (NoSuchAlgorithmException nsae) {
+			log.error("El algoritmo criptográfico no está disponible en este entorno", nsae);
+			
+		} catch (KeyManagementException kme) {
+			log.error("Se ha producido un error con el gestor de claves", kme);
+		}
+        
+        log.debug("Disabling SSL verification - END");
+	}
+	
+	
 }
