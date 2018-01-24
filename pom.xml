@@ -142,6 +142,11 @@ limitations under the License.
 							<source>${maven.compiler.source}</source>
 							<target>${maven.compiler.target}</target>
 							<encoding>UTF-8</encoding>
+							<archive>
+								<manifest>
+									<mainClass>com.indra.sofia4cities.ssap.kp.examples.Example</mainClass>
+								</manifest>
+							</archive>
 						</configuration>
 					</plugin>
 					<plugin>
@@ -153,6 +158,11 @@ limitations under the License.
 						<finalName>client-api-standalone</finalName>
 						<outputDirectory>${project.build.directory}</outputDirectory>
 						<appendAssemblyId>false</appendAssemblyId>
+						<archive>
+							<manifest>
+								<mainClass>com.indra.sofia4cities.ssap.kp.examples.Example</mainClass>
+							</manifest>
+						</archive>
 					</configuration>
 					<executions>
 						<execution>
