@@ -112,7 +112,7 @@ limitations under the License.
 		</repository>
 	</repositories>
 	<build>
-		<finalName>client-api-${project.version}</finalName>
+		<finalName>opensdk-${project.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -122,6 +122,7 @@ limitations under the License.
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
 					<encoding>UTF-8</encoding>
+					
 				</configuration>
 			</plugin>
 		</plugins>
@@ -155,7 +156,7 @@ limitations under the License.
 						<descriptorRefs>
 							<descriptorRef>jar-with-dependencies</descriptorRef>
 						</descriptorRefs>
-						<finalName>client-api-standalone</finalName>
+						<finalName>opensdk-standalone</finalName>
 						<outputDirectory>${project.build.directory}</outputDirectory>
 						<appendAssemblyId>false</appendAssemblyId>
 						<archive>

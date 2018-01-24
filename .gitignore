@@ -22,3 +22,6 @@ target/*
 # Log files
 *.log
 /target/
+
+# Exeptions
+!dist/*
